@@ -1,14 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { auth } from "./firebase"
+import { onAuthStateChanged } from "firebase/auth"
+import Auth from './components/Auth'
+import Tasks from './components/Tasks'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (firebaseUser) => {
+      setUser(firebaseUser);
+    });
+    return () => unsub();
+  }, []);
 
   return (
     <>
-      <div>
+      {/* <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -27,7 +39,12 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
+      </p> */}
+      <div style={{ padding: 20 }}>
+        <h1>Task Manager</h1>
+        <Auth user={user} />
+        <Tasks user={user} />
+      </div>
     </>
   )
 }

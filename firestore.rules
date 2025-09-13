@@ -12,7 +12,14 @@ service cloud.firestore {
       // Make sure to write security rules for your app before that time, or
       // else all client requests to your database will be denied until you
       // update your rules.
-      allow read, write: if request.time < timestamp.date(2025, 10, 13);
+
+      // original rules at the beginning of firebase initialization :
+      // allow read, write: if request.time < timestamp.date(2025, 10, 13);
+
+      // rules for db start in test mode.
+      // must update your security rules within 30 days to enable long-term client read/write access.
+      allow read, write: if
+          request.time < timestamp.date(2025, 10, 13);
     }
   }
 }
