@@ -4,9 +4,9 @@ import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
     apiKey: "",
     authDomain: "",
-    projectId: "",
+    projectId: "putyourlifetogether-1004",
     storageBucket: "",
-    messagingSenderId: "",
+    messagingSenderId: "1058573522917",
     appId: ""
 };
 

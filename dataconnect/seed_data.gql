@@ -1,0 +1,60 @@
+mutation SeedData @auth(level: USER) {
+  user_upsertMany(
+    data: [
+      {
+        id: "6b35e72c-7684-4a63-a371-7f9298b4e213"
+        displayName: "Alice"
+        email: "alice@example.com"
+        createdAt: "2024-01-01T00:00:00Z"
+      }
+      {
+        id: "e4b4d6b9-a4a1-4b5f-9a29-1d0a9d5a6a11"
+        displayName: "Bob"
+        email: "bob@example.com"
+        createdAt: "2024-01-02T00:00:00Z"
+      }
+    ]
+  )
+  category_upsertMany(
+    data: [
+      {
+        id: "1c6d5b2a-0d4a-4c8e-b2b3-9f8a5b4a1e2c"
+        userId: "6b35e72c-7684-4a63-a371-7f9298b4e213"
+        name: "Work"
+        description: "Tasks related to work"
+        createdAt: "2024-01-03T00:00:00Z"
+      }
+      {
+        id: "9a8b7c6d-5e4f-4a3b-9c8d-9e7f6a5b4d3c"
+        userId: "e4b4d6b9-a4a1-4b5f-9a29-1d0a9d5a6a11"
+        name: "Personal"
+        description: "Personal tasks"
+        createdAt: "2024-01-04T00:00:00Z"
+      }
+    ]
+  )
+  task_upsertMany(
+    data: [
+      {
+        id: "4f7a6b5c-8d9e-4f3a-9a7b-6c5d4e3f2a1b"
+        categoryId: "1c6d5b2a-0d4a-4c8e-b2b3-9f8a5b4a1e2c"
+        userId: "6b35e72c-7684-4a63-a371-7f9298b4e213"
+        title: "Write Report"
+        description: "Draft a weekly report"
+        dueDate: "2024-01-08"
+        isCompleted: false
+        createdAt: "2024-01-05T00:00:00Z"
+      }
+      {
+        id: "2d9c8b7a-6f5e-4c2d-9a6b-8c4d2e1f3a0b"
+        categoryId: "9a8b7c6d-5e4f-4a3b-9c8d-9e7f6a5b4d3c"
+        userId: "e4b4d6b9-a4a1-4b5f-9a29-1d0a9d5a6a11"
+        title: "Grocery Shopping"
+        description: "Buy groceries for the week"
+        dueDate: "2024-01-07"
+        isCompleted: true
+        createdAt: "2024-01-06T00:00:00Z"
+      }
+    ]
+  )
+}

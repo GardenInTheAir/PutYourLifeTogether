@@ -1,0 +1,35 @@
+mutation CreateTask @auth(level: USER) {
+  task_insert(data: {
+    userId_expr: "auth.uid",
+    title: "New Task",
+    description: "Task description",
+    isCompleted: false
+  })
+}
+
+query ListMyTasks @auth(level: USER) {
+  tasks(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    title
+    description
+    isCompleted
+    dueDate
+    category {
+      id
+      name
+    }
+  }
+}
+
+mutation UpdateTaskCompletion($taskId: UUID!, $isCompleted: Boolean!) @auth(level: USER) {
+  task_update(
+    key: {id: $taskId},
+    data: {
+      isCompleted: $isCompleted
+    }
+  )
+}
+
+mutation DeleteTask($taskId: UUID!) @auth(level: USER) {
+  task_delete(key: {id: $taskId})
+}
